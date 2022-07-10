@@ -1,4 +1,4 @@
-package countries
+package api
 
 import (
 	"encoding/json"

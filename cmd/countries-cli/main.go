@@ -1,27 +1,24 @@
 package main
 
 import (
-	"fmt"
-
 	countriescli "github.com/jlezcanof/go-external-api/internal"
 	"github.com/jlezcanof/go-external-api/internal/cli"
-	countries "github.com/jlezcanof/go-external-api/internal/storage/api"
+	"github.com/jlezcanof/go-external-api/internal/storage/api"
+	"github.com/jlezcanof/go-external-api/internal/storage/csv"
 
 	"github.com/spf13/cobra"
 )
 
 func main() {
-	fmt.Println("probando")
 
 	var apiService countriescli.CountryService
-	//var csvService countriescli.CSVService
+	var csvService countriescli.CSVService
 
-	apiService = countries.NewCountryService()
+	apiService = api.NewCountryService()
+	csvService = csv.NewCSVService()
 
-	//csvService = countries.newCsvService()
-
-	rootCmd := &cobra.Command{Use: "countries-cli"}
-	rootCmd.AddCommand(cli.InitCountriesCmd(apiService))
+	rootCmd := &cobra.Command{Use: "country-cli"}
+	rootCmd.AddCommand(cli.InitCountriesCmd(apiService, csvService))
 	rootCmd.Execute()
 
 }

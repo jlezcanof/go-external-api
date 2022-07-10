@@ -2,17 +2,16 @@ package csv
 
 import (
 	"encoding/csv"
+	"os"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
-
-	"os"
 )
 
 type csvRepo struct {
 	separator rune
 }
 
-func newCsvService() countriescli.CSVService {
+func NewCSVService() countriescli.CSVService {
 	return &csvRepo{','}
 }
 

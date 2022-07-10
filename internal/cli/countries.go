@@ -15,7 +15,7 @@ const idFlagName = "name"
 const idFlagIsFullText = "idFlagIsFullText"
 
 // InitCountriesCmd initialize beers command
-func InitCountriesCmd(apiService countriescli.CountryService) *cobra.Command {
+func InitCountriesCmd(apiService countriescli.CountryService, csvService countriescli.CSVService) *cobra.Command {
 	initCountriesCmd := &cobra.Command{
 		Use:   "countries",
 		Short: "Print data about api rest countries",
@@ -47,16 +47,16 @@ func runCountriesFn(service countriescli.CountryService) CobraFn {
 			log.Fatalf("Error while retrieving all countries: %s", err)
 		}
 		fmt.Println(countries)
-		/*
-			// de aqui en adelante sacarlo en un metodo de una interface
-			csvFile, errorFile := os.Create("output.csv")
+		/*TODO
+		// de aqui en adelante sacarlo en un metodo de una interface
+		csvFile, errorFile := os.Create("output.csv")
 
-			if errorFile != nil {
-				csvFile.Close()
-				return errorFile
-			}
+		if errorFile != nil {
+			csvFile.Close()
+			return errorFile
+		}
 
-			//fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
+		//fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
 		*/
 	}
 

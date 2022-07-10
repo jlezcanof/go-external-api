@@ -1,7 +1,5 @@
 package countriescli
 
-//"encoding/json"
-
 // Countries representation of api result into data struct
 type Countries struct {
 	Countries *[]Country `json:"result"`

@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	countriesEndpoint = "v3.1/all"
+	countriesEndpoint = "/v3.1/all"
 	countriesURL      = "https://restcountries.com"
 )
 
@@ -44,7 +44,7 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 // other impl
 func (c *countryService) GetCountriesPrint() (err error) {
 	fmt.Println("invoke get countries print")
-	response, err := http.Get(fmt.Sprint("%v%v", c.url, countriesEndpoint))
+	response, err := http.Get(fmt.Sprintf("%v%v", c.url, countriesEndpoint))
 	if err != nil {
 		return err
 	}

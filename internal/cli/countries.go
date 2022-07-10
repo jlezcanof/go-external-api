@@ -35,12 +35,13 @@ func runCountriesFn(service countriescli.CountryService) CobraFn {
 
 		if name != "" {
 			fmt.Println("name is", name)
+			//country, _ := service.GetOneCountry(name, fullText)
 		} else {
 			fmt.Println("no ha introducido flag name")
 		}
 
-		countries := service.GetCountriesPrint()
-		fmt.Println(countries)
+		countries, _ := service.GetCountriesPrint()
+		fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
 		fmt.Println("fulltext is", fullText)
 
 	}

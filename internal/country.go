@@ -4,7 +4,9 @@ package countriescli
 
 // Country representation of country into data struct
 type Country struct {
-	Name string `json:"name"`
+	//Name string `json:"name"`
+	Region    string `json:"region"`
+	SubRegion string `json:"subregion"`
 	//ProductID int       `json:"product_id"`
 	//Price     string    `json:"price"`
 	//BeerID    int       `json:"beer_id"`
@@ -14,22 +16,18 @@ type Country struct {
 	//Country   string    `json:"country"`
 }
 
-// CountryService definiton of methods to access a data country
+// CountryService definition of methods to access a data country
 type CountryService interface {
 	GetCountries() ([]Country, error)
-	GetCountriesPrint() error
+	GetCountriesPrint() ([]Country, error)
+	GetOneCountry() (Country, error, name string, isFulltext bool)
 }
 
-/* // NewBeer initialize struct beer
-func NewBeer(productID int, name, category, brewer, country, price string, beerType *BeerType) (b Beer) {
-	b = Beer{
-		ProductID: productID,
-		Name:      name,
-		Category:  category,
-		Type:      beerType,
-		Brewer:    brewer,
-		Country:   country,
-		Price:     price,
+// NewCountry initialize struct country
+func NewCountry(region string, subregion string) (c Country) {
+	c = Country{
+		Region:    region,
+		SubRegion: subregion,
 	}
 	return
-}*/
+}

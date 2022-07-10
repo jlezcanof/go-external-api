@@ -40,10 +40,14 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 		return nil, err
 	}
 
-	err = json.Unmarshal(contents, &countries)
+	//var result countriescli.Country
+	//result
+	err = json.Unmarshal(contents, &countries) //
 	if err != nil {
 		return nil, err
 	}
+
+	//countries = *result.Region
 
 	return
 }

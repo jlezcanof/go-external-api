@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"log"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
 	"github.com/spf13/cobra"
@@ -14,11 +15,11 @@ const idFlagName = "name"
 const idFlagIsFullText = "idFlagIsFullText"
 
 // InitCountriesCmd initialize beers command
-func InitCountriesCmd(service countriescli.CountryService) *cobra.Command {
+func InitCountriesCmd(apiService countriescli.CountryService) *cobra.Command {
 	initCountriesCmd := &cobra.Command{
 		Use:   "countries",
 		Short: "Print data about api rest countries",
-		Run:   runCountriesFn(service),
+		Run:   runCountriesFn(apiService),
 	}
 
 	initCountriesCmd.Flags().StringP(idFlagName, "n", "", "name of the country")
@@ -39,11 +40,24 @@ func runCountriesFn(service countriescli.CountryService) CobraFn {
 		} else {
 			fmt.Println("no ha introducido flag name")
 		}
-
-		countries, _ := service.GetCountries()
-		fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
 		fmt.Println("fulltext is", fullText)
 
+		countries, err := service.GetCountries()
+		if err != nil {
+			log.Fatalf("Error while retrieving all countries: %s", err)
+		}
+		fmt.Println(countries)
+		/*
+			// de aqui en adelante sacarlo en un metodo de una interface
+			csvFile, errorFile := os.Create("output.csv")
+
+			if errorFile != nil {
+				csvFile.Close()
+				return errorFile
+			}
+
+			//fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
+		*/
 	}
 
 }

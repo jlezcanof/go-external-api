@@ -40,7 +40,7 @@ func runCountriesFn(service countriescli.CountryService) CobraFn {
 			fmt.Println("no ha introducido flag name")
 		}
 
-		countries, _ := service.GetCountriesPrint()
+		countries, _ := service.GetCountries()
 		fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
 		fmt.Println("fulltext is", fullText)
 

@@ -19,7 +19,6 @@ type Country struct {
 // CountryService definition of methods to access a data country
 type CountryService interface {
 	GetCountries() ([]Country, error)
-	GetCountriesPrint() ([]Country, error)
 	GetOneCountry() (Country, error, name string, isFulltext bool)
 }
 

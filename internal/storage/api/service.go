@@ -23,26 +23,13 @@ func NewCountryService() countriescli.CountryService {
 	return &countryService{url: countriesURL}
 }
 
-func (c *countryService) GetCountries() (countries []countriescli.Country, err error) {
-	response, err := http.Get(fmt.Sprint("%v%v", c.url, countriesEndpoint))
-	if err != nil {
-		return nil, err
-	}
-	contents, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal(contents, &countries)
-	if err != nil {
-		return nil, err
-	}
-
-	return
-}
-
 // other impl
-func (c *countryService) GetCountriesPrint() (countries []countriescli.Country, err error) {
+func (c *countryService) GetCountries() (countries []countriescli.Country, err error) {
+	resp, _ := http.Get(fmt.Sprintf("%v%v", c.url, countriesEndpoint))
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(body)) //de esta manera si que saca las keys
+	//fmt.Println(resp)
+
 	fmt.Println("invoke get countries print")
 	response, err := http.Get(fmt.Sprintf("%v%v", c.url, countriesEndpoint))
 	if err != nil {

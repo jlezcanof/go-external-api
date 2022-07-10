@@ -5,7 +5,7 @@ import (
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
 	"github.com/jlezcanof/go-external-api/internal/cli"
-	"github.com/jlezcanof/go-external-api/internal/storage/countries"
+	countries "github.com/jlezcanof/go-external-api/internal/storage/api"
 	"github.com/spf13/cobra"
 )
 

@@ -34,19 +34,20 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		name, _ := cmd.Flags().GetString(idFlagName)
 		fullText, _ := cmd.Flags().GetBool(idFlagIsFullText)
 
+		fmt.Println("fulltext is", fullText)
 		if name != "" {
 			fmt.Println("name is", name)
 			//country, _ := service.GetOneCountry(name, fullText)
 		} else {
 			fmt.Println("no ha introducido flag name")
 		}
-		fmt.Println("fulltext is", fullText)
+		//fmt.Println("fulltext is", fullText)
 
 		countries, err := apiService.GetCountries()
 		if err != nil {
 			log.Fatalf("Error while retrieving all countries: %s", err)
 		}
-		fmt.Println(countries)
+		//fmt.Println(countries)
 		csvService.SaveDocument(&countries, "output-file")
 		/*TODO
 		// de aqui en adelante sacarlo en un metodo de una interface

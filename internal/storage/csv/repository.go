@@ -17,7 +17,7 @@ func NewCSVService() countriescli.CSVService {
 
 var headers = []string{"Region", "SubRegion"}
 
-func (c *csvRepo) SaveCSV(countries *[]countriescli.Country, filename string) error {
+func (c *csvRepo) SaveDocument(countries *[]countriescli.Country, filename string) error {
 
 	csvFile, err := os.Create(filename)
 

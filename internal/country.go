@@ -26,7 +26,7 @@ type CountryService interface {
 }
 
 type CSVService interface {
-	SaveCSV(*[]Country, string) error
+	SaveDocument(*[]Country, string) error
 }
 
 // NewCountry initialize struct country

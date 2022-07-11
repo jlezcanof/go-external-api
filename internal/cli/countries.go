@@ -19,7 +19,7 @@ func InitCountriesCmd(apiService countriescli.CountryService, csvService countri
 	initCountriesCmd := &cobra.Command{
 		Use:   "countries",
 		Short: "Print data about api rest countries",
-		Run:   runCountriesFn(apiService),
+		Run:   runCountriesFn(apiService, csvService),
 	}
 
 	initCountriesCmd.Flags().StringP(idFlagName, "n", "", "name of the country")
@@ -28,7 +28,7 @@ func InitCountriesCmd(apiService countriescli.CountryService, csvService countri
 	return initCountriesCmd
 }
 
-func runCountriesFn(service countriescli.CountryService) CobraFn {
+func runCountriesFn(apiService countriescli.CountryService, csvService countriescli.CSVService) CobraFn {
 
 	return func(cmd *cobra.Command, args []string) {
 		name, _ := cmd.Flags().GetString(idFlagName)
@@ -42,11 +42,12 @@ func runCountriesFn(service countriescli.CountryService) CobraFn {
 		}
 		fmt.Println("fulltext is", fullText)
 
-		countries, err := service.GetCountries()
+		countries, err := apiService.GetCountries()
 		if err != nil {
 			log.Fatalf("Error while retrieving all countries: %s", err)
 		}
 		fmt.Println(countries)
+		csvService.SaveDocument(&countries, "output-file")
 		/*TODO
 		// de aqui en adelante sacarlo en un metodo de una interface
 		csvFile, errorFile := os.Create("output.csv")

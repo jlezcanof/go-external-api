@@ -9,14 +9,23 @@ type Countries struct {
 type Country struct {
 	Region    string `json:"region"`
 	SubRegion string `json:"subregion"`
-	//Name string `json:"name"`
-	//ProductID int       `json:"product_id"`
-	//Price     string    `json:"price"`
-	//BeerID    int       `json:"beer_id"`
-	//Category  string    `json:"category"`
-	//Type      *BeerType `json:"type"`
-	//Brewer    string    `json:"brewer"`
-	//Country   string    `json:"country"`
+	Name      Name   `json:"name"`
+	Fifa      string `json:"fifa"`
+}
+
+type Name struct {
+	Common     string     `json:"common"`
+	Oficial    string     `json:"official"`
+	NativeName NativeName `json:"nativeName"`
+}
+
+type NativeName struct {
+	Spa Spa `json:"spa"`
+}
+
+type Spa struct {
+	Official string `json:"official"`
+	Common   string `json:"common"`
 }
 
 // CountryService definition of methods to access a data country (api rest)
@@ -30,10 +39,10 @@ type CSVService interface {
 }
 
 // NewCountry initialize struct country
-func NewCountry(region string, subregion string) (c Country) {
+/*func NewCountry(region string, subregion string) (c Country) {
 	c = Country{
 		Region:    region,
 		SubRegion: subregion,
 	}
 	return
-}
+}*/

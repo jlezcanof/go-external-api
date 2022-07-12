@@ -38,28 +38,18 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		if name != "" {
 			fmt.Println("name is", name)
 			//country, _ := service.GetOneCountry(name, fullText)
+			apiService.GetOneCountry()
 		} else {
 			fmt.Println("no ha introducido flag name")
 		}
-		//fmt.Println("fulltext is", fullText)
 
 		countries, err := apiService.GetCountries()
 		if err != nil {
 			log.Fatalf("Error while retrieving all countries: %s", err)
 		}
 		//fmt.Println(countries)
-		csvService.SaveDocument(&countries, "output-file")
-		/*TODO
-		// de aqui en adelante sacarlo en un metodo de una interface
-		csvFile, errorFile := os.Create("output.csv")
 
-		if errorFile != nil {
-			csvFile.Close()
-			return errorFile
-		}
-
-		//fmt.Println("run countries fn ", countries) //solo esta sacando el value, no el key
-		*/
+		csvService.SaveDocument(&countries, "output-file"+name)
 	}
 
 }

@@ -46,11 +46,10 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 		return nil, err
 	}
 
-	//countries = *result.Region
 	return
 }
 
-func (c *countryService) GetOneCountry() (Country, error, name string, isFulltext bool) {
+func (c *countryService) GetOneCountry(name string, isFulltext bool) (country countriescli.Country, err error) {
 	fmt.Println("invoke get one country")
 
 	return

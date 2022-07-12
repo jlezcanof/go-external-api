@@ -37,8 +37,11 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		fmt.Println("fulltext is", fullText)
 		if name != "" {
 			fmt.Println("name is", name)
-			//country, _ := service.GetOneCountry(name, fullText)
-			apiService.GetOneCountry()
+			country, error := apiService.GetOneCountry(name, fullText)
+			if error != nil {
+				log.Fatalf("Error while retrieving the country : %s", name)
+			}
+			fmt.Println(country)
 		} else {
 			fmt.Println("no ha introducido flag name")
 		}
@@ -47,7 +50,6 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		if err != nil {
 			log.Fatalf("Error while retrieving all countries: %s", err)
 		}
-		//fmt.Println(countries)
 
 		csvService.SaveDocument(&countries, "output-file"+name)
 	}

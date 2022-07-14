@@ -1,7 +1,6 @@
 package cli
 
 import (
-	"fmt"
 	"log"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
@@ -34,24 +33,23 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		name, _ := cmd.Flags().GetString(idFlagName)
 		fullText, _ := cmd.Flags().GetBool(idFlagIsFullText)
 
-		fmt.Println("fulltext is", fullText)
-		if name != "" {
-			fmt.Println("name is", name)
-			country, error := apiService.GetOneCountry(name, fullText)
-			if error != nil {
-				log.Fatalf("Error while retrieving the country : %s", name)
-			}
-			fmt.Println(country)
-
-		} else {
-			fmt.Println("no ha introducido flag name")
+		if name == "" {
+			//fmt.Println("no ha introducido flag name")
 
 			countries, err := apiService.GetCountries()
 			if err != nil {
 				log.Fatalf("Error while retrieving all countries: %s", err)
 			}
 
-			csvService.SaveDocument(&countries, "output-file"+name)
+			csvService.SaveDocument(&countries, "output-all-countries")
+		} else {
+			//fmt.Println("name is", name)
+			countries, error := apiService.GetOneCountry(name, fullText)
+			if error != nil {
+				log.Fatalf("Error while retrieving the country : %s", name)
+			}
+			//fmt.Println(countries)
+			csvService.SaveDocument(&countries, "output-country-"+name)
 		}
 
 	}

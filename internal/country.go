@@ -31,18 +31,9 @@ type Spa struct {
 // CountryService definition of methods to access a data country (api rest)
 type CountryService interface {
 	GetCountries() ([]Country, error)
-	GetOneCountry(name string, isfullText bool) (Country, error)
+	GetOneCountry(name string, isfullText bool) ([]Country, error)
 }
 
 type CSVService interface {
 	SaveDocument(*[]Country, string) error
 }
-
-// TODO deleteNewCountry initialize struct country
-/*func NewCountry(region string, subregion string) (c Country) {
-	c = Country{
-		Region:    region,
-		SubRegion: subregion,
-	}
-	return
-}*/

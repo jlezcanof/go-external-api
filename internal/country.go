@@ -38,7 +38,7 @@ type CSVService interface {
 	SaveDocument(*[]Country, string) error
 }
 
-// NewCountry initialize struct country
+// TODO deleteNewCountry initialize struct country
 /*func NewCountry(region string, subregion string) (c Country) {
 	c = Country{
 		Region:    region,

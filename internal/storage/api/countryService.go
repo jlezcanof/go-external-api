@@ -12,6 +12,7 @@ import (
 const (
 	countriesEndpoint = "/v3.1/all"
 	countriesURL      = "https://restcountries.com"
+	//countryEndpoint   = "/v3.1/name/%s?fullText=%t"
 )
 
 type countryService struct {
@@ -51,6 +52,29 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 
 func (c *countryService) GetOneCountry(name string, isFulltext bool) (country countriescli.Country, err error) {
 	fmt.Println("invoke get one country")
+
+	url := fmt.Sprintf("%v/v3.1/name/%s?fullText=%t", c.url, name, isFulltext)
+	fmt.Println(url)
+
+	responseCountry, error := http.Get(url)
+
+	if error != nil {
+		//return nil, nil
+		fmt.Printf(fmt.Sprintf("hubo error en la invocacion get: %v", error))
+	}
+
+	contents, err := ioutil.ReadAll(responseCountry.Body)
+	if error != nil {
+		fmt.Println("hubo error en la lectura de la response")
+		//return nil, error
+	}
+
+	fmt.Println(&contents)
+	error = json.Unmarshal(contents, &country)
+	if error != nil {
+		fmt.Println("hubo error al un marshallear el objeto json de la response")
+		//return nil, error
+	}
 
 	return
 }

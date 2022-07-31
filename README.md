@@ -9,7 +9,15 @@ Comando que obtiene datos de api rest de paises:
 
 
 PROFILE:
+  MEMORIA
   - Se aniade al final del main.go unas sentencias para obtener el profiling de memoria
   - Para obtener los valores obtenidos del fichero resultante:
      go tool pprof cmd/countries-cli/main.go countries.mem.prof
      luego en consola estas dentro de la herramienta: - top 5
+
+  CPU
+  - Para el profiling de cpu se aniade unas sentencias al principio del main.go
+  - Para obtener los valores obtenidos del fichero resultante:
+    go tool pprof cmd/countries-cli/main.go countries.cpu.prof
+    luego en consola top 5
+    luego vemos la grafica del camino critico (web)

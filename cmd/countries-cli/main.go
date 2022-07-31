@@ -16,6 +16,13 @@ import (
 
 func main() {
 
+	// cpu profiling code starts here
+	f, _ := os.Create("countries.cpu.prof")
+	defer f.Close()
+	pprof.StartCPUProfile(f)
+	defer pprof.StopCPUProfile()
+	// cpu profiling code ends here
+
 	var apiService countriescli.CountryService
 	var csvService countriescli.CSVService
 
@@ -26,8 +33,8 @@ func main() {
 	rootCmd.AddCommand(cli.InitCountriesCmd(apiService, csvService))
 	rootCmd.Execute()
 
-	// memory profiling code starts here
-	f, _ := os.Create("countries.mem.prof")
-	defer f.Close()
-	pprof.WriteHeapProfile(f)
+	// // memory profiling code starts here
+	// f, _ := os.Create("countries.mem.prof")
+	// defer f.Close()
+	// pprof.WriteHeapProfile(f)
 }

@@ -25,4 +25,9 @@ PROFILE:
 
 BENCHMARK:
   - Se aniade una forma de obtener el rendimiento comparando ejecuciones distinta con usos distintos
-  de tooling para el unmarshal     
+  de tooling para el unmarshal 
+   /internal/storage/api: go test -run=GetCountries -bench=. > ${fileName}    
+
+   luego se compara con benchcmp bench.old bench.new
+   NOTA: las utilidades go (golang-golang-x-tools)que se han instalado corresponden a la version 1.13 (actualmente estoy usando la 1.18),
+   ver una manera de instalar benchstat (pues benchcmp esta deprecada)

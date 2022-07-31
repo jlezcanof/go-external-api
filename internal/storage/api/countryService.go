@@ -37,7 +37,7 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 	}
 
 	//err = json.Unmarshal(contents, &countries)
-	err = c.standarUnmarshall(contents, &countries)
+	err = c.betterUnmarshall(contents, &countries)
 	if err != nil {
 		return nil, err
 	}

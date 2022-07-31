@@ -1,0 +1,20 @@
+invoke get all countries
+goos: linux
+goarch: amd64
+pkg: github.com/jlezcanof/go-external-api/internal/storage/api
+cpu: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
+BenchmarkGetCountries-8    	       1	1804388990 ns/op
+invoke get one country
+BenchmarkGetOneCountry-8   	invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+invoke get one country
+       6	 178592610 ns/op
+PASS
+ok  	github.com/jlezcanof/go-external-api/internal/storage/api	3.807s

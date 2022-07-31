@@ -6,7 +6,12 @@ import (
 	"github.com/jlezcanof/go-external-api/internal/storage/api"
 	"github.com/jlezcanof/go-external-api/internal/storage/csv"
 
+	"os"
+
 	"github.com/spf13/cobra"
+
+	//"net/http/pprof"
+	"runtime/pprof"
 )
 
 func main() {
@@ -21,4 +26,8 @@ func main() {
 	rootCmd.AddCommand(cli.InitCountriesCmd(apiService, csvService))
 	rootCmd.Execute()
 
+	// memory profiling code starts here
+	f, _ := os.Create("countries.mem.prof")
+	defer f.Close()
+	pprof.WriteHeapProfile(f)
 }

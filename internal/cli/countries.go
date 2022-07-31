@@ -48,7 +48,7 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 			if error != nil {
 				log.Fatalf("Error while retrieving the country : %s", name)
 			}
-			//fmt.Println(countries)
+
 			csvService.SaveDocument(&countries, "output-country-"+name)
 		}
 

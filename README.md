@@ -21,3 +21,8 @@ PROFILE:
     go tool pprof cmd/countries-cli/main.go countries.cpu.prof
     luego en consola top 5
     luego vemos la grafica del camino critico (web)
+
+
+BENCHMARK:
+  - Se aniade una forma de obtener el rendimiento comparando ejecuciones distinta con usos distintos
+  de tooling para el unmarshal     

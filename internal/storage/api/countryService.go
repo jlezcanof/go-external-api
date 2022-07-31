@@ -7,6 +7,8 @@ import (
 	"net/http"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
+	//"github.com/jlezcanof/golang-examples/09-benchmarking/internal/errors"
+	jsoniter "github.com/json-iterator/go"
 )
 
 const (
@@ -34,8 +36,8 @@ func (c *countryService) GetCountries() (countries []countriescli.Country, err e
 		return nil, err
 	}
 
-	//var result countriescli.Countryoracle/database:18.4.0-xe
-	err = json.Unmarshal(contents, &countries)
+	//err = json.Unmarshal(contents, &countries)
+	err = c.standarUnmarshall(contents, &countries)
 	if err != nil {
 		return nil, err
 	}
@@ -68,4 +70,22 @@ func (c *countryService) GetOneCountry(name string, isFulltext bool) (countries 
 	}
 
 	return
+}
+
+func (c *countryService) standarUnmarshall(data []byte, countries any) error { //countries []countriescli.Country
+	err := json.Unmarshal(data, &countries)
+	if err != nil {
+		return err //TODO crear estructura de errores
+		//errors.WrapDataUnreacheable(err, "can't parsing response into beers")
+	}
+	return nil
+}
+
+func (c *countryService) betterUnmarshall(data []byte, countries any) error { //countries []countriescli.Country
+	err := jsoniter.Unmarshal(data, &countries)
+	if err != nil {
+		return err //TODO crear estructura de errores
+		//errors.WrapDataUnreacheable(err, "can't parsing response into beers")
+	}
+	return nil
 }

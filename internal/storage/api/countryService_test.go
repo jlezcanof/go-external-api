@@ -10,8 +10,6 @@ func BenchmarkGetCountries(b *testing.B) {
 	}
 }
 
-// ojo que hay otro metodo get countries para testear
-// func BenchmarkGetOneCountry(b *testing.B) {
 func BenchmarkGetOneCountry(b *testing.B) {
 	service := NewCountryService()
 	b.ResetTimer()

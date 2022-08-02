@@ -7,6 +7,19 @@ Comando que obtiene datos de api rest de paises:
         a) si encuentra el pais, fichero csv con el nombre del pais,
         b) sino lo encuentra mensaje de no encontrado
 
+ - Ejecucion para ver info del comando: go run /cmd/countries-cli/main.go countries -h
+   Output:
+     Print data about api rest countries
+
+   Usage:
+     country-cli countries [flags]
+
+   Flags:
+     -h, --help               help for countries
+     -f, --idFlagIsFullText   flag is the search is full text
+     -n, --name string        name of the country
+    
+
 
 PROFILE:
   MEMORIA

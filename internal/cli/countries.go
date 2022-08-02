@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"fmt"
 	"log"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
@@ -33,25 +34,28 @@ func runCountriesFn(apiService countriescli.CountryService, csvService countries
 		name, _ := cmd.Flags().GetString(idFlagName)
 		fullText, _ := cmd.Flags().GetBool(idFlagIsFullText)
 
-		if name == "" {
-			//fmt.Println("no ha introducido flag name")
-
-			countries, err := apiService.GetCountries()
-			if err != nil {
-				log.Fatalf("Error while retrieving all countries: %s", err)
-			}
-
-			csvService.SaveDocument(&countries, "output-all-countries")
-		} else {
-			//fmt.Println("name is", name)
-			countries, error := apiService.GetOneCountry(name, fullText)
-			if error != nil {
-				log.Fatalf("Error while retrieving the country : %s", name)
-			}
-
-			csvService.SaveDocument(&countries, "output-country-"+name)
-		}
+		invokeCommand(name, apiService, csvService, fullText)
 
 	}
 
+}
+
+func invokeCommand(name string, apiService countriescli.CountryService, csvService countriescli.CSVService, fullText bool) {
+
+	var nameFile = "output-all-countries"
+	var url = "https://restcountries.com/v3.1/all"
+	if name != "" {
+		//url para uno
+		nameFile = "output-country-" + name
+		url = "https://restcountries.com/"
+		url = fmt.Sprintf("https://restcountries.com/v3.1/name/%s?fullText=%t", name, fullText)
+	}
+
+	fmt.Println("url es:", url)
+	countries, error := apiService.GetCountries(url)
+	if error != nil {
+		log.Fatalf("Error while retrieving all countries: %s", error)
+	}
+
+	csvService.SaveDocument(&countries, nameFile)
 }

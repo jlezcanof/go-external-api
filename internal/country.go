@@ -30,8 +30,7 @@ type Spa struct {
 
 // CountryService definition of methods to access a data country (api rest)
 type CountryService interface {
-	GetCountries() ([]Country, error)
-	GetOneCountry(name string, isfullText bool) ([]Country, error)
+	GetCountries(url string) ([]Country, error)
 }
 
 type CSVService interface {

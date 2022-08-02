@@ -25,30 +25,8 @@ func NewCountryService() countriescli.CountryService {
 	return &countryService{url: countriesURL}
 }
 
-func (c *countryService) GetCountries() (countries []countriescli.Country, err error) {
-	fmt.Println("invoke get all countries")
-	response, err := http.Get(fmt.Sprintf("%v%v", c.url, countriesEndpoint))
-	if err != nil {
-		return nil, err
-	}
-	contents, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	err = c.betterUnmarshall(contents, &countries)
-	if err != nil {
-		return nil, err
-	}
-
-	return
-}
-
-func (c *countryService) GetOneCountry(name string, isFulltext bool) (countries []countriescli.Country, err error) {
-	fmt.Println("invoke get one country")
-
-	url := fmt.Sprintf("%v/v3.1/name/%s?fullText=%t", c.url, name, isFulltext)
-
+/* new*/
+func (c *countryService) GetCountries(url string) (countries []countriescli.Country, err error) {
 	responseCountries, error := http.Get(url)
 
 	if error != nil {
@@ -64,12 +42,14 @@ func (c *countryService) GetOneCountry(name string, isFulltext bool) (countries 
 
 	error = json.Unmarshal(contents, &countries)
 	if error != nil {
-		fmt.Println("hubo error al un marshallear el objeto json de la response")
+		fmt.Println("hubo error al unmarshallear el objeto json de la response")
 		return nil, error
 	}
 
 	return
 }
+
+/* */
 
 func (c *countryService) standarUnmarshall(data []byte, countries any) error { //countries []countriescli.Country
 	err := json.Unmarshal(data, &countries)

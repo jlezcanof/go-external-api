@@ -45,9 +45,8 @@ func invokeCommand(name string, apiService countriescli.CountryService, csvServi
 	var nameFile = "output-all-countries"
 	var url = "https://restcountries.com/v3.1/all"
 	if name != "" {
-		//url para uno
+		//url para un pais
 		nameFile = "output-country-" + name
-		url = "https://restcountries.com/"
 		url = fmt.Sprintf("https://restcountries.com/v3.1/name/%s?fullText=%t", name, fullText)
 	}
 

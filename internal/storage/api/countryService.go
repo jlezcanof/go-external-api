@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	countriescli "github.com/jlezcanof/go-external-api/internal"
-	//"github.com/jlezcanof/golang-examples/09-benchmarking/internal/errors"
 	jsoniter "github.com/json-iterator/go"
 )
 

@@ -23,7 +23,7 @@ func InitCountriesCmd(apiService countriescli.CountryService, csvService countri
 	}
 
 	initCountriesCmd.Flags().StringP(idFlagName, "n", "", "name of the country")
-	initCountriesCmd.Flags().BoolP(idFlagIsFullText, "f", false, "flag is the search is full text")
+	initCountriesCmd.Flags().BoolP(idFlagIsFullText, "f", false, "flag full text of search")
 
 	return initCountriesCmd
 }
